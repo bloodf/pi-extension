@@ -158,7 +158,9 @@ function normalizeOpenAIModel(
 		model.capabilities && typeof model.capabilities === "object"
 			? (model.capabilities as Record<string, unknown>)
 			: {};
-	const imageSupport = booleanCapability(capabilities.image_input);
+	const imageSupport = booleanCapability(
+		capabilities.image_input ?? capabilities.vision,
+	);
 	const explicitInput = normalizedInput(model.input, defaults.input);
 	const input =
 		imageSupport === true
@@ -171,15 +173,20 @@ function normalizeOpenAIModel(
 		reasoning:
 			typeof model.reasoning === "boolean"
 				? model.reasoning
-				: (booleanCapability(capabilities.thinking) ?? defaults.reasoning),
+				: (booleanCapability(capabilities.thinking ?? capabilities.reasoning) ??
+					defaults.reasoning),
 		input,
 		cost: normalizedCost(model.cost, defaults.cost),
 		contextWindow:
-			positiveNumber(model.context_window ?? model.max_input_tokens) ??
-			defaults.contextWindow,
+			positiveNumber(
+				model.context_window ??
+					model.max_input_tokens ??
+					capabilities.contextWindow,
+			) ?? defaults.contextWindow,
 		maxTokens:
-			positiveNumber(model.max_tokens ?? model.max_output_tokens) ??
-			defaults.maxTokens,
+			positiveNumber(
+				model.max_tokens ?? model.max_output_tokens ?? capabilities.maxOutput,
+			) ?? defaults.maxTokens,
 	};
 	return applyOverride(normalized, provider.overrides[model.id]);
 }

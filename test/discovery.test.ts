@@ -25,11 +25,23 @@ test("discovers OpenAI models with bearer auth, metadata, overrides, and filters
 					{
 						id: "gpt-new",
 						name: "GPT New",
-						context_window: 200_000,
-						max_tokens: 16_000,
-						input: ["text", "image"],
+						capabilities: {
+							contextWindow: 200_000,
+							maxOutput: 16_000,
+							reasoning: true,
+							vision: true,
+						},
 					},
 					{ id: "gpt-new" },
+					{
+						id: "gpt-capabilities",
+						capabilities: {
+							contextWindow: 100_000,
+							maxOutput: 12_000,
+							reasoning: false,
+							vision: false,
+						},
+					},
 					{ id: "gpt-legacy" },
 					{ id: "embedding-only" },
 				],
@@ -40,12 +52,16 @@ test("discovers OpenAI models with bearer auth, metadata, overrides, and filters
 	assert.equal(requestHeaders?.get("user-agent"), "gateway-client/1.0");
 	assert.deepEqual(
 		models.map((model) => model.id),
-		["gpt-new"],
+		["gpt-capabilities", "gpt-new"],
 	);
-	assert.equal(models[0]?.contextWindow, 200_000);
-	assert.equal(models[0]?.maxTokens, 32_000);
-	assert.equal(models[0]?.reasoning, true);
-	assert.deepEqual(models[0]?.input, ["text", "image"]);
+	assert.equal(models[0]?.contextWindow, 100_000);
+	assert.equal(models[0]?.maxTokens, 12_000);
+	assert.equal(models[0]?.reasoning, false);
+	assert.deepEqual(models[0]?.input, ["text"]);
+	assert.equal(models[1]?.contextWindow, 200_000);
+	assert.equal(models[1]?.maxTokens, 32_000);
+	assert.equal(models[1]?.reasoning, true);
+	assert.deepEqual(models[1]?.input, ["text", "image"]);
 });
 
 test("paginates Anthropic models and maps official capabilities", async () => {
