@@ -156,6 +156,14 @@ For each model:
 
 OpenAI's standard Models API does not report context limits, output limits, pricing, or capabilities. Zero cost means unknown tracking data, not free service.
 
+OpenAI-compatible gateways may enrich each model with a `capabilities` object.
+The extension maps both standard-style and common gateway fields when present:
+
+- `capabilities.image_input` or `capabilities.vision`
+- `capabilities.thinking` or `capabilities.reasoning`
+- `capabilities.contextWindow`
+- `capabilities.maxOutput`
+
 Anthropic fields mapped when present:
 
 - `display_name`
