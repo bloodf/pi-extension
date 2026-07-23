@@ -1,0 +1,23 @@
+name: Host E2E
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hosts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22.19.0"
+          cache: npm
+      - run: npm ci
+      - name: Install current Pi and OMP CLIs
+        run: npm install --global @earendil-works/pi-coding-agent@latest @oh-my-pi/pi-coding-agent@latest
+      - name: Exercise dynamic discovery in both hosts
+        run: npx tsx test/e2e-hosts.ts

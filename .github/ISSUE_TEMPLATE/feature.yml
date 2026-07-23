@@ -1,0 +1,35 @@
+name: Feature request
+description: Propose a focused provider-discovery improvement
+title: "feat: "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the user-visible limitation without prescribing an implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+    validations:
+      required: true
+  - type: dropdown
+    id: host
+    attributes:
+      label: Host scope
+      options:
+        - Pi and OMP
+        - Pi only
+        - OMP only
+    validations:
+      required: true
+  - type: textarea
+    id: security
+    attributes:
+      label: Credential or network implications
+      description: Explain new trust boundaries, or write "None".
+    validations:
+      required: true

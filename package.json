@@ -1,0 +1,87 @@
+{
+	"name": "@bloodf/pi-provider-discovery",
+	"version": "0.1.0",
+	"description": "Dynamic OpenAI-compatible and Anthropic-compatible model discovery for Pi and OMP",
+	"type": "module",
+	"main": "./src/index.ts",
+	"exports": "./src/index.ts",
+	"files": [
+		"src",
+		"docs",
+		"README.md",
+		"CONTRIBUTING.md",
+		"CODE_OF_CONDUCT.md",
+		"LICENSE",
+		"SECURITY.md",
+		"CHANGELOG.md"
+	],
+	"scripts": {
+		"lint": "biome check src test package.json tsconfig.json biome.json",
+		"test": "tsx --test test/**/*.test.ts",
+		"typecheck": "tsc --noEmit",
+		"check": "npm run lint && npm run typecheck && npm test",
+		"prepack": "npm run check"
+	},
+	"keywords": [
+		"pi-package",
+		"pi-coding-agent",
+		"omp",
+		"oh-my-pi",
+		"model-discovery",
+		"openai",
+		"anthropic",
+		"provider"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bloodf/pi-extension.git"
+	},
+	"bugs": {
+		"url": "https://github.com/bloodf/pi-extension/issues"
+	},
+	"homepage": "https://github.com/bloodf/pi-extension#readme",
+	"author": {
+		"name": "Heitor Ramon Ribeiro",
+		"email": "heitor.ramon@gmail.com",
+		"url": "https://github.com/bloodf"
+	},
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"engines": {
+		"node": ">=22.19.0"
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-coding-agent": ">=0.81.1",
+		"@oh-my-pi/pi-coding-agent": ">=17.0.9"
+	},
+	"peerDependenciesMeta": {
+		"@earendil-works/pi-coding-agent": {
+			"optional": true
+		},
+		"@oh-my-pi/pi-coding-agent": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.5",
+		"@earendil-works/pi-coding-agent": "^0.81.1",
+		"@oh-my-pi/pi-coding-agent": "^17.0.9",
+		"tsx": "^4.23.1",
+		"typescript": "^7.0.2"
+	},
+	"pi": {
+		"extensions": [
+			"./src/index.ts"
+		]
+	},
+	"omp": {
+		"name": "provider-discovery",
+		"version": "0.1.0",
+		"description": "Dynamic OpenAI-compatible and Anthropic-compatible model discovery",
+		"extensions": [
+			"./src/index.ts"
+		]
+	}
+}

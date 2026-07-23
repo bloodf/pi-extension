@@ -1,0 +1,10 @@
+node_modules/
+coverage/
+*.tgz
+.DS_Store
+provider-discovery.json
+cache/
+.env
+.env.*
+!.env.example
+.omc/
