@@ -376,10 +376,9 @@ export function resolveRuntimePaths(
 		: undefined;
 	const agentDir = resolve(
 		env.PI_CODING_AGENT_DIR?.trim() ||
-			ompAgentDir ||
 			(explicitConfig
 				? dirname(resolve(explicitConfig))
-				: inferredDefaultAgentDir(argv)),
+				: ompAgentDir || inferredDefaultAgentDir(argv)),
 	);
 	const configPath = resolve(
 		explicitConfig || join(agentDir, "provider-discovery.json"),

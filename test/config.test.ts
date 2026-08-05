@@ -95,6 +95,19 @@ test("resolves explicit, Pi, and OMP profile paths", () => {
 		).agentDir,
 		"/tmp/explicit-agent",
 	);
+	const explicitConfigPaths = resolveRuntimePaths(
+		{
+			OMP_CONFIG_DIR: "/tmp/omp-profile",
+			PI_PROVIDER_DISCOVERY_CONFIG: "/tmp/custom/providers.json",
+		},
+		["node", "omp"],
+	);
+	assert.equal(explicitConfigPaths.agentDir, "/tmp/custom");
+	assert.equal(explicitConfigPaths.configPath, "/tmp/custom/providers.json");
+	assert.equal(
+		explicitConfigPaths.cachePath,
+		"/tmp/custom/cache/provider-discovery.json",
+	);
 	assert.match(
 		resolveRuntimePaths({}, ["/usr/local/bin/pi"]).agentDir,
 		/\.pi\/agent$/,
