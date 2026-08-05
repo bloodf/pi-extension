@@ -371,8 +371,12 @@ export function resolveRuntimePaths(
 	argv: string[] = process.argv,
 ): RuntimePaths {
 	const explicitConfig = env.PI_PROVIDER_DISCOVERY_CONFIG?.trim();
+	const ompAgentDir = env.OMP_CONFIG_DIR?.trim()
+		? join(env.OMP_CONFIG_DIR.trim(), "agent")
+		: undefined;
 	const agentDir = resolve(
 		env.PI_CODING_AGENT_DIR?.trim() ||
+			ompAgentDir ||
 			(explicitConfig
 				? dirname(resolve(explicitConfig))
 				: inferredDefaultAgentDir(argv)),

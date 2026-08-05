@@ -80,6 +80,21 @@ test("resolves explicit, Pi, and OMP profile paths", () => {
 		]).agentDir,
 		"/tmp/profile-a",
 	);
+	assert.equal(
+		resolveRuntimePaths({ OMP_CONFIG_DIR: "/tmp/omp-profile" }, ["node", "omp"])
+			.agentDir,
+		"/tmp/omp-profile/agent",
+	);
+	assert.equal(
+		resolveRuntimePaths(
+			{
+				OMP_CONFIG_DIR: "/tmp/omp-profile",
+				PI_CODING_AGENT_DIR: "/tmp/explicit-agent",
+			},
+			["node", "omp"],
+		).agentDir,
+		"/tmp/explicit-agent",
+	);
 	assert.match(
 		resolveRuntimePaths({}, ["/usr/local/bin/pi"]).agentDir,
 		/\.pi\/agent$/,
