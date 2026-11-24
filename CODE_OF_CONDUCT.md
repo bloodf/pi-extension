@@ -34,7 +34,7 @@ This Code applies in project spaces and when an individual officially represents
 
 ## Enforcement
 
-Report abusive, harassing, or otherwise unacceptable behavior privately to heitor.ramon@gmail.com. Reports are reviewed promptly and kept confidential to the extent possible.
+Report abusive, harassing, or otherwise unacceptable behavior privately to contact@example.org. Reports are reviewed promptly and kept confidential to the extent possible.
 
 Maintainers follow the Contributor Covenant enforcement guidelines when determining consequences, from correction through temporary or permanent bans.
 
