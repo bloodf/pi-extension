@@ -52,3 +52,15 @@ Use concise imperative subjects. Explain why in the body when the change is not 
 ## Releases
 
 Maintainers update `CHANGELOG.md`, verify packed contents, tag the exact tested commit, and publish the public npm package. GitHub and npm release artifacts must come from the same commit.
+
+## Privacy
+
+Keep the owner's private setup out of source, tests, fixtures, docs, commits,
+branch names, issues, pull requests and comments. Do not include machine names,
+home or worktree paths, private network details, service ports or hostnames,
+thread and task IDs, personal email or provider accounts, quota or credit data,
+device identifiers, Wi-Fi names, or secrets.
+
+Use RFC 5737 addresses such as `192.0.2.10`, example domains, `printer-1`,
+`<serial>`, and `$HOME/...`. Keep hardware findings and redact the identifying
+details. Run `sh scripts/check-privacy.sh` before submitting changes.
